@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    container_name: ODOO_CLIENT_DB
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=mydb-dev
+      - POSTGRES_USER=Biuser
+      - POSTGRES_PASSWORD=Avengers
+    ports:
+      - "5448:5438"
+
+  odoo_client:
+    build:
+      context: .
+    ports:
+      - "8005:8000"
+    volumes:
+      - ./odoo_client:/odoo_client
+    container_name: ODOO_CLIENT_APP
+    command: >
+      sh -c " python manage.py makemigrations &&
+              python manage.py migrate &&
+              python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=mydb-dev
+      - DB_USER=Biuser
+      - DB_PASS=Avengers
+      - DB_PORT=5432
