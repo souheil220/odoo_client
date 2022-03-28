@@ -1,5 +1,8 @@
 {% load static %}
-<div style="display: flex; justify-content: space-around; margin-bottom: 5%">
+<div
+  id="basic_info"
+  style="display: flex; justify-content: space-around; margin-bottom: 5%"
+>
   <div
     style="display: flex; justify-content: space-around; flex-direction: column"
   >
@@ -12,6 +15,7 @@
   </div>
   <div
     style="display: flex; justify-content: space-around; flex-direction: column"
+    id="basic_info"
   >
     <h6>{{client.id}}</h6>
     <h6>{{client.name}}</h6>
@@ -54,6 +58,17 @@
       placeholder="{{client.x_art}}"
       value="{{client.x_art}}"
     />
+    <div
+      style="
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 2%;
+        align-items: center;
+      "
+    >
+      <label for="est_particulier">Est particulier ?</label
+      ><input type="checkbox" id="est_particulier" name="est_particulier" />
+    </div>
   </div>
 </div>
 
