@@ -12,6 +12,15 @@ services:
     ports:
       - "5448:5438"
 
+  redis:
+    image: redis
+    container_name: ODOO_CLIENT_CASH
+    ports:
+      - "6378:6379"
+    volumes:
+      - ./config/redis.conf:/redis.conf
+    command: [ "redis-server", "/redis.conf" ]
+
   odoo_client:
     build:
       context: .
@@ -30,3 +39,5 @@ services:
       - DB_USER=Biuser
       - DB_PASS=Avengers
       - DB_PORT=5432
+      - CASH_HOST=redis
+      - CASH_PORT=6379

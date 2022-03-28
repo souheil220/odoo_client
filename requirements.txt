@@ -9,3 +9,5 @@ sqlparse==0.4.1
 requests==2.25.1
 typing-extensions==3.7.4.3
 openpyxl==3.0.7
+redis
+django_redis

@@ -12,6 +12,7 @@ RUN apk --update add --no-cache g++
 
 # Install postgres client
 RUN apk add --update --no-cache postgresql-client
+RUN apk add busybox-extras
 
 # Install individual dependencies
 # so that we could avoid installing extra packages to the container
@@ -20,6 +21,7 @@ RUN apk add --update --no-cache --virtual .tmp-build-deps \
     && apk add jpeg-dev zlib-dev libjpeg \
     && pip install Pillow 
 
+RUN apk --update add redis 
 
 
 RUN pip install -r requirements.txt

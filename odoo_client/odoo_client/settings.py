@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "pages",
+    "clients",
 ]
 
 MIDDLEWARE = [
@@ -72,6 +73,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "odoo_client.wsgi.application"
 
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://"
+        + os.environ.get("CASH_HOST")
+        + ":"
+        + os.environ.get("CASH_PORT")
+        + "/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

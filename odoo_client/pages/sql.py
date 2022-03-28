@@ -1,6 +1,9 @@
 import ldap3
 from ldap3 import Server, Connection
 import psycopg2
+from django.conf import settings
+
+image_path = settings.MEDIA_ROOT
 
 
 def connexion_ad2000(email_util, passw_util):
@@ -12,7 +15,13 @@ def connexion_ad2000(email_util, passw_util):
             conn.search(
                 search_base="dc=groupe-hasnaoui,dc=local",
                 search_filter="(sAMAccountName=" + ad_2000 + ")",
-                attributes=("sAMAccountName", "mail", "title", "displayName"),
+                attributes=(
+                    "sAMAccountName",
+                    "mail",
+                    "title",
+                    "displayName",
+                    "thumbnailPhoto",
+                ),
             )
             result_string = str(conn.entries[0])
             Name = result_string.split("displayName: ")[1]
@@ -21,7 +30,14 @@ def connexion_ad2000(email_util, passw_util):
             mail = mail.split()[0]
             title = result_string.split("title: ")[1]
             title = title.split("\r\n")[0]
+            thumbnailPhoto = conn.entries[0].thumbnailPhoto.value
             dict = {"name": Name, "mail": mail, "ad_2000": ad_2000, "title": title}
+            if thumbnailPhoto is None:
+                dict["thumbnailPhoto"] = ""
+            else:
+                dict["thumbnailPhoto"] = thumbnailPhoto
+                open(f"{image_path}/{ad_2000}.png",
+                     "wb").write(conn.entries[0].thumbnailPhoto.value)
             msg = dict
         else:
             msg = "deco"
@@ -39,8 +55,14 @@ def connexion_email(email_util, passw_util):
         if conn:
             conn.search(
                 search_base="dc=groupe-hasnaoui,dc=local",
-                search_filter="(mail=" + email_util + ")",
-                attributes=["sAMAccountName", "mail", "title", "displayName"],
+                search_filter="(sAMAccountName=" + ad_2000 + ")",
+                attributes=(
+                    "sAMAccountName",
+                    "mail",
+                    "title",
+                    "displayName",
+                    "thumbnailPhoto",
+                ),
             )
             result_string = str(conn.entries[0])
             Name = result_string.split("displayName: ")[1]
@@ -49,12 +71,20 @@ def connexion_email(email_util, passw_util):
             ad_2000 = ad_2000.split()[0]
             title = result_string.split("title: ")[1]
             title = title.split("\r\n")[0]
+            thumbnailPhoto = conn.entries[0].thumbnailPhoto.value
             dict = {
                 "name": Name,
                 "mail": email_util,
                 "ad_2000": ad_2000,
                 "title": title,
             }
+            if thumbnailPhoto is None:
+                dict["thumbnailPhoto"] = ""
+            else:
+                dict["thumbnailPhoto"] = thumbnailPhoto
+                open(f"{image_path}/{ad_2000}.png", "wb").write(
+                    conn.entries[0].thumbnailPhoto.value
+                )
             msg = dict
         else:
             msg = "deco"

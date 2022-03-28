@@ -45,8 +45,11 @@ def loginPage(request):
 
             else:
                 messages.error(request, "Accès non autorisé")
+    else:
+        return render(request, "pages/login.html")
 
 
 def logoutUser(request):
+    print("logout")
     logout(request)
     return redirect("login")

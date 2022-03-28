@@ -1,0 +1,62 @@
+{% load static %}
+<div style="display: flex; justify-content: space-around; margin-bottom: 5%">
+  <div
+    style="display: flex; justify-content: space-around; flex-direction: column"
+  >
+    <h6>ID</h6>
+    <h6>NOM</h6>
+    <h6>RC</h6>
+    <h6>NIF</h6>
+    <h6>NIS</h6>
+    <h6>ART</h6>
+  </div>
+  <div
+    style="display: flex; justify-content: space-around; flex-direction: column"
+  >
+    <h6>{{client.id}}</h6>
+    <h6>{{client.name}}</h6>
+    <!-- <input
+      type="text"
+      
+      placeholder="{{client.x_rc}}"
+      id="rc"
+      type="text" 
+      data-inputmask="'mask': '99A9999999-99/99'" 
+      maxlength="16"
+      value="{{client.x_rc}}"
+    /> -->
+    <input
+      id="cc"
+      class="form-control"
+      type="text"
+      data-inputmask="'mask': '99A9999999-99/99'"
+      placeholder="{{client.x_rc}}"
+      value="{{client.x_rc}}"
+    />
+    <input
+      type="text"
+      class="form-control"
+      placeholder="{{client.x_nif}}"
+      value="{{client.x_nif}}"
+      mask="9{16}0{3}"
+      maxlength="20"
+    />
+    <input
+      type="text"
+      class="form-control"
+      placeholder="{{client.x_nis}}"
+      value="{{client.x_nis}}"
+      maxlength="15"
+    />
+    <input
+      type="text"
+      class="form-control"
+      placeholder="{{client.x_art}}"
+      value="{{client.x_art}}"
+    />
+  </div>
+</div>
+
+<script src="{% static 'js/jquery-1.js' %}"></script>
+<script src="{% static 'js/robinHerbots.js' %}"></script>
+<script src="{% static 'js/detailClient.js' %}"></script>
