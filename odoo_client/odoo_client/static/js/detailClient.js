@@ -60,12 +60,12 @@ $(document).ready(function () {
                         } else {
                             $('#label_ID').removeAttr('hidden');
                             $('#input_ID').removeAttr('hidden');
-                            $('#ID_pro_title').attr("hidden", true);
-                            $('#ID_date_title').attr("hidden", true);
-                            $('#ID_authority_title').attr("hidden", true);
-                            $('#ID_pro').attr("hidden", true);
-                            $('#ID_date').attr("hidden", true);
-                            $('#ID_authority').attr("hidden", true);
+                            $('#ID_pro_title').remove()
+                            $('#ID_date_title').remove()
+                            $('#ID_authority_title').remove()
+                            $('#ID_pro').remove()
+                            $('#ID_date').remove()
+                            $('#ID_authority').remove()
                         }
                     });
             } else {
