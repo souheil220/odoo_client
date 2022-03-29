@@ -102,7 +102,23 @@
       <div class="page-wrapper">
         <div class="page-content">
           <!--breadcrumb-->
-
+          <div class="col">
+            <div class="card radius-10 bg-danger bg-gradient">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <div>
+                    <p class="mb-0 text-white">Total Pénalité</p>
+                    <h4 class="my-1 text-white">
+                      DZD {% widthratio dataLength 1 5000 %}
+                    </h4>
+                  </div>
+                  <!-- <div class="text-white ms-auto font-35">
+                    <i class="bx bx-dollar"></i>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
           <!--end breadcrumb-->
           <h6 class="mb-0 text-uppercase">DataTable Example</h6>
           <hr />
@@ -258,7 +274,6 @@
     <script src="{% static 'plugins/perfect-scrollbar/js/perfect-scrollbar.js' %}"></script>
     <script src="{% static 'plugins/datatable/js/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'plugins/datatable/js/dataTables.bootstrap5.min.js' %}"></script>
-    
 
     <!-- <script>
 		$(document).ready(function() {
@@ -269,37 +284,51 @@
 		  } );
 	</script> -->
     <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleDarkModal"
-      tabindex="-1"
-      aria-hidden="true"
+    <form
+      id="client_details"
+      method="post"
+      action="{% url 'modifierClient' %}"
+      enctype="multipart/form-data"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content bg-dark">
-          <div class="modal-header">
-            <h5 class="modal-title text-white">Modal title</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body text-white" id="exemple">...</div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-light" data-bs-dismiss="modal">
-              Close
-            </button>
-            <button type="button" class="btn btn-dark">Save changes</button>
+      {% csrf_token %}
+      <input hidden id="id_client_selected" name="id_client_selected" />
+      <div
+        class="modal fade"
+        id="exampleDarkModal"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content bg-dark">
+            <div class="modal-header">
+              <h5 class="modal-title text-white">Modal title</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body text-white" id="exemple">...</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-light"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-dark">Save changes</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
 
     <script>
       $exemple = $("#exemple");
       function showDetail(id) {
+        $("#id_client_selected").val(id);
         $exemple.load("detailClient/" + id);
       }
     </script>

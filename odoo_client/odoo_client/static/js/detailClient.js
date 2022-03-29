@@ -5,6 +5,8 @@ $(document).ready(function () {
         clearMaskOnLostFocus: true
     })
 
+
+
     $('#est_particulier').change(
         function () {
             if ($(this).is(':checked')) {
@@ -19,6 +21,7 @@ $(document).ready(function () {
                 ><input type="checkbox" id="professional_non_commercial" name="professional_non_commercial" /></div>
                 <input
                 id="input_ID"
+                name="input_ID"
                 type="text"
                 class="form-control"
                 required
@@ -31,6 +34,7 @@ $(document).ready(function () {
                         if ($(this).is(':checked')) {
                             $('#label_ID').attr("hidden", true);
                             $('#input_ID').attr("hidden", true);
+                            $('#input_ID').removeAttr('required');
                             $('#label_ID').after(`
                             <h6 id="ID_pro_title">N° ID professionel</h6>
                             <h6 id="ID_date_title">Date de délivrance</h6>
@@ -38,24 +42,28 @@ $(document).ready(function () {
                             `)
                             $('#input_ID').after(`
                             <input
+                            name="ID_pro"
                                 id="ID_pro"
                                 type="text"
                                 class="form-control"
                                 required
                             />
                             <input
+                            name="ID_date"
                                 id="ID_date"
-                                type="date"
                                 class="form-control"
+                                type="date"
                                 required
                             />
                             <input
+                            name="ID_authority"
                                 id="ID_authority"
                                 type="text"
                                 class="form-control"
                                 required
                             />
                                             `)
+
 
                         } else {
                             $('#label_ID').removeAttr('hidden');

@@ -57,3 +57,48 @@ class SQLConnexion:
         cursor.execute(sqlQuery)
         data = cursor.fetchall()
         return data
+
+    def update_client_infos(
+        self,
+        cursor,
+        connection,
+        x_rc,
+        x_nif,
+        x_nis,
+        x_art,
+        x_is_professional_non_commercial,
+        x_is_professional_identity_ref,
+        x_identity_ref_issuing_authority,
+        x_identity_ref_delivery_date,
+        x_person_identity,
+        is_person,
+        id,
+    ):
+        print(type(x_identity_ref_delivery_date))
+        sqlQuery = """UPDATE res_partner 
+                    SET x_rc = '{}',
+                    x_nif = '{}',
+                    x_nis = '{}',
+                    x_art = '{}',
+                    x_is_professional_non_commercial = {},
+                    x_is_professional_identity_ref='{}', 
+                    x_identity_ref_issuing_authority = '{}',
+                    x_identity_ref_delivery_date = '{}',
+                    x_person_identity = '{}',
+                    is_person = {}
+                    where id ={} 
+                    """.format(
+            x_rc,
+            x_nif,
+            x_nis,
+            x_art,
+            x_is_professional_non_commercial,
+            x_is_professional_identity_ref,
+            x_identity_ref_issuing_authority,
+            x_identity_ref_delivery_date,
+            x_person_identity,
+            is_person,
+            id,
+        )
+        cursor.execute(sqlQuery)
+        connection.commit()
