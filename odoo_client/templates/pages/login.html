@@ -13,6 +13,10 @@
       type="image/png"
     />
     <!-- loader-->
+    <link
+      href="{% static 'plugins/notifications/css/lobibox.min.css' %}"
+      rel="stylesheet"
+    />
     <link href="{% static 'css/pace.min.css' %}" rel="stylesheet" />
     <script src="{% static 'js/pace.min.js' %}"></script>
     <!-- Bootstrap CSS -->
@@ -28,6 +32,8 @@
   </head>
 
   <body class="bg-theme bg-theme2">
+    <input hidden id="status" value="{{failed}}" />
+    <input hidden id="message" value="{{messages}}" />
     <!--wrapper-->
     <form
       method="POST"
@@ -156,6 +162,19 @@
 
     <!--plugins-->
     <script src="{% static 'js/jquery.min.js'%}"></script>
+    <script src="{% static 'plugins/notifications/js/lobibox.min.js'%}"></script>
+    <script src="{% static 'plugins/notifications/js/notifications.min.js'%}"></script>
+    <script src="{% static 'plugins/notifications/js/notification-custom-script.js'%}"></script>
+    <script>
+      console.log("test");
+      window.onload = function () {
+        var status = $("#status").val();
+        if (status !== "") {
+          error_noti($("#message").val());
+        }
+      };
+    </script>
+
     <!--Password show & hide js -->
     <script>
       $(document).ready(function () {
@@ -261,6 +280,7 @@
     </script>
 
     {% include 'partials/_footer.html'%}
+    <div class="lobibox-notify-wrapper top right"></div>
   </body>
 
   <!-- Mirrored from codervent.com/dashtrans/demo/vertical/authentication-signin.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Mar 2022 10:39:54 GMT -->

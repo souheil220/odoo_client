@@ -1,4 +1,4 @@
-{% load static %} {% load image_exists %}
+{% load static %} {% load image_exists %} {% load intspace %}
 <!DOCTYPE html>
 <html lang="en">
   <!-- Mirrored from codervent.com/dashtrans/demo/vertical/table-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Mar 2022 10:39:52 GMT -->
@@ -103,14 +103,13 @@
         <div class="page-content">
           <!--breadcrumb-->
           <div class="col">
+            {% if penalite > 0 %}
             <div class="card radius-10 bg-danger bg-gradient">
               <div class="card-body">
                 <div class="d-flex align-items-center">
                   <div>
                     <p class="mb-0 text-white">Total Pénalité</p>
-                    <h4 class="my-1 text-white">
-                      DZD {% widthratio dataLength 1 5000 %}
-                    </h4>
+                    <h4 class="my-1 text-white">DZD {{ penalite|intspace }}</h4>
                   </div>
                   <!-- <div class="text-white ms-auto font-35">
                     <i class="bx bx-dollar"></i>
@@ -118,6 +117,21 @@
                 </div>
               </div>
             </div>
+            {% else %}
+            <div class="card radius-10 bg-success bg-gradient">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <div>
+                    <p class="mb-0 text-white">Total Pénalité</p>
+                    <h4 class="my-1 text-white">DZD {{ penalite|intspace }}</h4>
+                  </div>
+                  <!-- <div class="text-white ms-auto font-35">
+                    <i class="bx bx-dollar"></i>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+            {% endif %}
           </div>
           <!--end breadcrumb-->
           <h6 class="mb-0 text-uppercase">DataTable Example</h6>

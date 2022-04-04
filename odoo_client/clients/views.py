@@ -53,8 +53,7 @@ def index(request):
         redis_cache = False
         print(data[0][0])
     database.closeConnection(list[0], list[1])
-    # print(data[0].name)
-    context = {"data": data, "cache": redis_cache,"dataLength":len(data)}
+    context = {"penalite": len(data) * 5000, "data": data, "cache": redis_cache}
     return render(request, "clients/index.html", context)
 
 

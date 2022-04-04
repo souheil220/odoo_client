@@ -28,7 +28,9 @@ def loginPage(request):
 
         print("connexion ", connexion)
         if connexion == "deco":
-            messages.error(request, "Something went wrong")
+            messages.error(request, "AD/Email ou PASSWORD erroné")
+            context = {"failed": True, "messages": "AD/Email ou PASSWORD erroné"}
+            return render(request, "pages/login.html", context)
         else:
             user = authenticate(
                 request, username=connexion["ad_2000"], password=pass_django
@@ -45,6 +47,8 @@ def loginPage(request):
 
             else:
                 messages.error(request, "Accès non autorisé")
+                context = {"failed": True, "messages": "Utilisateur Innéxistant"}
+                render(request, "pages/login.html", context)
     else:
         return render(request, "pages/login.html")
 
