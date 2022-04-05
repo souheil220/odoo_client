@@ -23,6 +23,7 @@ def connexion_ad2000(email_util, passw_util):
                     "thumbnailPhoto",
                 ),
             )
+
             result_string = str(conn.entries[0])
             Name = result_string.split("displayName: ")[1]
             Name = Name.split("\r\n")[0]
@@ -36,8 +37,9 @@ def connexion_ad2000(email_util, passw_util):
                 dict["thumbnailPhoto"] = ""
             else:
                 dict["thumbnailPhoto"] = thumbnailPhoto
-                open(f"{image_path}/{ad_2000}.png",
-                     "wb").write(conn.entries[0].thumbnailPhoto.value)
+                open(f"{image_path}/{ad_2000}.png", "wb").write(
+                    conn.entries[0].thumbnailPhoto.value
+                )
             msg = dict
         else:
             msg = "deco"
@@ -47,8 +49,6 @@ def connexion_ad2000(email_util, passw_util):
 
 
 def connexion_email(email_util, passw_util):
-    print("email ", email_util)
-    print("pass ", passw_util)
     server = Server("10.10.10.11", get_info=ldap3.ALL)
     try:
         conn = Connection(server, email_util, passw_util, auto_bind=True)

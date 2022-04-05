@@ -1,12 +1,10 @@
 from multiprocessing.dummy.connection import Client
-import os
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .sql import SQLConnexion
 from .models import *
 from django.core.cache import cache
-import redis
-from django.http import Http404, HttpResponse
+from django.http import Http404
 from datetime import datetime
 
 # Create your views here.
@@ -48,7 +46,7 @@ def index(request):
                 x_identity_ref_delevery_date=None,
                 x_identity_refissuing8quthority=None,
             )
-            cache.set(client.id, client)
+            cache.set(client.id, client, 3600000)
         print("cache set")
         redis_cache = False
         print(data[0][0])

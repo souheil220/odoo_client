@@ -8,6 +8,7 @@ from .sql import connexion_ad2000, connexion_email
 # Create your views here.
 
 
+
 def index(request):
     if request.user.is_authenticated:
         return redirect("clients/")
